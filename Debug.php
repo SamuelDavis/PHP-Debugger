@@ -81,6 +81,13 @@ class Debug
 					'value' => "NULL");
 				break;
 
+			case "string":
+				$obj = array(
+					'type' => $type,
+					'length' => strlen($obj),
+					'original' => $obj);
+				break;
+
 			case "boolean":
 				//Boolean values can't be print_r'd, so convert them to strings
 				$obj = array(
