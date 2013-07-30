@@ -130,4 +130,24 @@ class Debug
 			die("Killed");
 		}
 	}
+
+	/* Get the parameter names from the source code of a function */
+	public static function getParameters() {
+		//Get a handle on the file and function which was called just before this one -- the one whose parameters we want
+		$trace = debug_backtrace();
+
+		//Get the sourcecode from the file
+		$code = file_get_contents($trace[1]["file"]);
+
+		//Cut out whatever text matches the function name up until its closing round-bracket
+		preg_match('/'.$trace[1]["function"].'.*\)/', $code, $params);
+		$params = $params[0];
+
+		//Refine the params string so that it is an array of the parameter names
+		$start = strpos($params, "(");
+		$params = substr($params, $start + 1, -1);
+		$params = str_replace(" ", "", $params);
+		$params = explode(",", $params);
+		return $params;
+	}
 }

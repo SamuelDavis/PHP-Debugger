@@ -11,9 +11,9 @@ function a()
 	$object = new Debug();
 	Debug::p($object, "What happens if I enter an object into the Debugger and request only the 'last' call in the backtrace?", "last");
 
-	Debug::p(null, "What happens if I pass no object ('null'), request a full backtrace ('all') and enter 'true' as the last (4th) argument?", 'all', true);
+	//Debug::p(null, "What happens if I pass no object ('null'), request a full backtrace ('all') and enter 'true' as the last (4th) argument?", 'all', true);
 
-	echo "This is never shown, that's what.";
+	// echo "This is never shown, that's what.";
 }
 
 function b()
@@ -27,3 +27,10 @@ function c()
 }
 
 c();
+
+function test($a, $b, $c)
+{
+	$params = Debug::getParameters();
+	Debug::p($params, "What happens if I call getParameters inside of a function with the declaration 'test(\$a, \$b, \$c)'?");
+}
+@test();
