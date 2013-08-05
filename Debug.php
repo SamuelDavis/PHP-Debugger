@@ -152,13 +152,13 @@ class Debug
 	}
 
 	/* Get statistics on running a function */
-	public static function functionStats($outputTo = "log", $function)
+	public static function functionStats($outputTo = "log", $function, $arguments)
 	{
 		$startTime = time();
 		$startMem = memory_get_usage();
-		$output = $function();
+		$output = call_user_func_array($function, $arguments);
 		$runtime = time() - $startTime; //Get the execution time
-		$memoryUse = memory_get_peak_usage() - $startMem;
+		$memoryUse = memory_get_peak_usage(true) - $startMem;
 
 		$statistics = array(
 			"Runtime" => $runtime,
