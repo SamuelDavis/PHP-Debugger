@@ -150,4 +150,37 @@ class Debug
 		$params = explode(",", $params);
 		return $params;
 	}
+
+	/* Get statistics on running a function */
+	public static function functionStats($outputTo = "log", $function)
+	{
+		$startTime = time();
+		$startMem = memory_get_usage();
+		$output = $function();
+		$runtime = time() - $startTime; //Get the execution time
+		$memoryUse = memory_get_peak_usage() - $startMem;
+
+		$statistics = array(
+			"Runtime" => $runtime,
+			"Memory usage" => $memoryUse
+			);
+
+		//Output statistics to error_log or page
+		switch(strtolower($outputTo))
+		{
+			case 1:
+			case "log":
+				self::e($statistics, "Runtime:");
+				break;
+			case 2:
+			case "page":
+				self::p($statistics, "Runtime:");
+				break;
+			default:
+				break;
+		}
+
+		//return function execution so as to not interrupt application flow
+		return $output;
+	}
 }
