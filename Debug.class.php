@@ -63,14 +63,11 @@ class Debug
 		if(isset($msg))
 		{
 			//make sure it ends in a newline
-			if(substr($msg, -1) != "\n")
-			{
-				$msg .= "\n";	
-			}
+			if(substr($msg, -1) != "\n") { $msg .= "\n"; }
 		}
 		else
 		{
-			$msg = "";	
+			$msg = "";
 		}
 
 		//Give as complete a detail of that object as possible, formatted based on its type
@@ -114,10 +111,7 @@ class Debug
 	public static function e($obj = null, $msg = null, $traceLevel = null, $die = false)
 	{
 		error_log(self::getOutput($obj, $msg, $traceLevel));
-		if($die)
-		{
-			die("Killed");
-		}
+		if($die) { die("Killed"); }
 	}
 
 	/* Write the object details to the page with backtrace details */
@@ -125,10 +119,7 @@ class Debug
 	{
 		//Encapsulate output in <pre> tags to ensure clean formatting on page
 		echo "<pre>".self::getOutput($obj, $msg, $traceLevel)."</pre>";
-		if($die)
-		{
-			die("Killed");
-		}
+		if($die) { die("Killed"); }
 	}
 
 	/* Get the parameter names from the source code of a function */
@@ -162,8 +153,7 @@ class Debug
 
 		$statistics = array(
 			"Runtime" => $runtime,
-			"Memory usage" => $memoryUse
-			);
+			"Memory usage" => $memoryUse);
 
 		//Output statistics to error_log or page
 		switch(strtolower($outputTo))
@@ -172,10 +162,12 @@ class Debug
 			case "log":
 				self::e($statistics, "Runtime:");
 				break;
+				
 			case 2:
 			case "page":
 				self::p($statistics, "Runtime:");
 				break;
+
 			default:
 				break;
 		}
