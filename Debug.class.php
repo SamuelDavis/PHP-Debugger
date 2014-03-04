@@ -23,7 +23,7 @@ class Debug
 			//Generate a 1-line, file-name, line-number reminder of where the user put the Debug call
 			if(!isset($trace[1]["class"]) || $trace[1]["class"] != "Debug")
 			{
-				$debugCall = "(Debug in ".$trace[0]["file"]." at line: ".$trace[0]["line"].")";
+				$debugCall = "\n(Debug in ".$trace[0]["file"]." at line: ".$trace[0]["line"].")";
 			}
 			//If this function call is in the debug class, remove it
 			$trace = array_slice($trace, 1);
